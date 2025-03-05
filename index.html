@@ -41,6 +41,23 @@
             transition: background 0.3s ease;
         }
 
+        .carousel {
+            position: relative;
+            max-width: 600px;
+            margin: 20px auto;
+            overflow: hidden;
+            border-radius: 8px;
+        }
+
+        .carousel img {
+            width: 100%;
+            display: none; /* Masquer toutes les images par défaut */
+        }
+
+        .active {
+            display: block; /* Afficher seulement l'image active */
+        }
+
         section {
             padding: 20px;
             background-color: #E1BEE7; /* Une couleur violet clair */
@@ -72,7 +89,13 @@
             </ul>
         </nav>
     </header>
-    
+
+    <div class="carousel">
+        <img src="https://via.placeholder.com/600x300?text=Image+1" class="active" alt="Image 1">
+        <img src="https://via.placeholder.com/600x300?text=Image+2" alt="Image 2">
+        <img src="https://via.placeholder.com/600x300?text=Image+3" alt="Image 3">
+    </div>
+
     <section id="accueil">
         <h2>À propos de moi</h2>
         <p>Bonjour, je suis Boumbenda Ghyslain Glenn, et voici un aperçu de mon site web où je présente mes services de vente en ligne.</p>
@@ -91,13 +114,17 @@
         <h2>Contactez-moi</h2>
         <form>
             <label for="name">Nom :</label>
-            <input type="text" id="name" name="name" required placeholder="Votre nom">
+            <input type="text" id="name" name="name" required placeholder="Votre nom" readonly value="Boumbenda Ghyslain Glenn">
+            
             <label for="email">Email :</label>
-            <input type="email" id="email" name="email" required placeholder="Votre email">
+            <input type="email" id="email" name="email" required placeholder="Votre email" readonly value="boumbendaghyslain@outlook.fr">
+            
             <label for="whatsapp">Numéro WhatsApp :</label>
-            <input type="text" id="whatsapp" name="whatsapp" required placeholder="Votre numéro WhatsApp">
+            <input type="text" id="whatsapp" name="whatsapp" required placeholder="Votre numéro WhatsApp" readonly value="+212693350278">
+            
             <input type="submit" value="Envoyer">
         </form>
+        <p>Vous pouvez également me contacter par e-mail : <a href="mailto:boumbendaghyslain@outlook.fr">boumbendaghyslain@outlook.fr</a></p>
     </section>
 
     <footer>
@@ -107,16 +134,27 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const sections = document.querySelectorAll("section");
+            const images = document.querySelectorAll(".carousel img");
+            let currentImage = 0;
+
+            // Animation des sections
             sections.forEach((section, index) => {
-                // Ajoutez une animation après un délai
                 setTimeout(() => {
                     section.style.transition = "opacity 0.5s ease, transform 0.5s ease";
                     section.style.opacity = 1; // Affichez la section
                     section.style.transform = "translateY(0)"; // Remettez à la position d'origine
                 }, index * 300); // Délai croissant pour chaque section
             });
+
+            // Carrousel d'images
+            function showNextImage() {
+                images[currentImage].classList.remove("active");
+                currentImage = (currentImage + 1) % images.length;
+                images[currentImage].classList.add("active");
+            }
+
+            setInterval(showNextImage, 3000); // Changer d'image toutes les 3 secondes
         });
     </script>
 </body>
 </html>
-

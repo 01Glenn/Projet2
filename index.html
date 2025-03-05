@@ -63,8 +63,7 @@
             background-color: #E1BEE7; /* Une couleur violet clair */
             margin: 20px;
             border-radius: 8px; /* Coins arrondis */
-            opacity: 0; /* Initialement caché */
-            transform: translateY(20px); /* Position initiale */
+            display: none; /* Masquer toutes les sections par défaut */
         }
 
         footer {
@@ -83,9 +82,9 @@
         <h1>Bienvenue sur Mon Site Web</h1>
         <nav>
             <ul>
-                <li><a href="#accueil">Accueil</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#" onclick="showSection('accueil')">Accueil</a></li>
+                <li><a href="#" onclick="showSection('services')">Services</a></li>
+                <li><a href="#" onclick="showSection('contact')">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -96,7 +95,7 @@
         <img src="https://via.placeholder.com/600x300?text=Image+3" alt="Image 3">
     </div>
 
-    <section id="accueil">
+    <section id="accueil" style="display: block;">
         <h2>À propos de moi</h2>
         <p>Bonjour, je suis Boumbenda Ghyslain Glenn, et voici un aperçu de mon site web où je présente mes services de vente en ligne.</p>
     </section>
@@ -133,18 +132,8 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const sections = document.querySelectorAll("section");
             const images = document.querySelectorAll(".carousel img");
             let currentImage = 0;
-
-            // Animation des sections
-            sections.forEach((section, index) => {
-                setTimeout(() => {
-                    section.style.transition = "opacity 0.5s ease, transform 0.5s ease";
-                    section.style.opacity = 1; // Affichez la section
-                    section.style.transform = "translateY(0)"; // Remettez à la position d'origine
-                }, index * 300); // Délai croissant pour chaque section
-            });
 
             // Carrousel d'images
             function showNextImage() {
@@ -155,6 +144,19 @@
 
             setInterval(showNextImage, 3000); // Changer d'image toutes les 3 secondes
         });
+
+        function showSection(sectionId) {
+            // Masquer toutes les sections
+            const sections = document.querySelectorAll("section");
+            sections.forEach(section => {
+                section.style.display = 'none';
+            });
+
+            // Afficher la section demandée
+            const activeSection = document.getElementById(sectionId);
+            activeSection.style.display = 'block';
+        }
     </script>
 </body>
 </html>
+

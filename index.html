@@ -4,68 +4,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Site Web</title>
+    <title>Boutique en Ligne</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            line-height: 1.6;
             margin: 0;
             padding: 0;
             background-color: #f8f0f5; /* Un fond léger */
         }
-
         header {
             background: #D5006D; /* Couleur rose */
             color: white;
             padding: 10px 0;
             text-align: center;
         }
-
         nav ul {
             list-style: none;
             padding: 0;
         }
-
         nav ul li {
             display: inline;
             margin: 0 15px;
         }
-
         nav a {
             color: white;
             text-decoration: none;
         }
-
         nav a:hover {
             background: rgba(255, 255, 255, 0.2);
             transition: background 0.3s ease;
         }
-
-        .carousel {
-            position: relative;
-            max-width: 600px;
-            margin: 20px auto;
-            overflow: hidden;
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        .product {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px;
+            text-align: center;
+            background-color: white;
+            display: inline-block;
+            width: calc(25% - 20px); /* Quatre produits par ligne */
+        }
+        .product img {
+            max-width: 100%;
+            height: auto;
             border-radius: 8px;
         }
-
-        .carousel img {
-            width: 100%;
-            display: none; /* Masquer toutes les images par défaut */
+        .product h3 {
+            margin: 10px 0;
         }
-
-        .active {
-            display: block; /* Afficher seulement l'image active */
+        .product p {
+            margin: 10px 0;
+            color: #555;
         }
-
-        section {
-            padding: 20px;
-            background-color: #E1BEE7; /* Une couleur violet clair */
-            margin: 20px;
-            border-radius: 8px; /* Coins arrondis */
-            display: none; /* Masquer toutes les sections par défaut */
+        .product button {
+            background-color: #D5006D;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
         }
-
+        .product button:hover {
+            background-color: #C51162;
+        }
+        .cart, .personal-info, .chatbot {
+            margin-top: 20px;
+            background-color: #E1BEE7;
+            padding: 15px;
+            border-radius: 8px;
+        }
         footer {
             text-align: center;
             padding: 10px 0;
@@ -75,136 +87,188 @@
             bottom: 0;
             width: 100%;
         }
-
-        .sub-section {
-            display: none; /* Masquer les sous-sections par défaut */
-            margin-top: 20px;
-            background-color: #D1C4E9; /* Une couleur violet clair pour les sous-sections */
-            padding: 15px;
-            border-radius: 8px; /* Coins arrondis */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 300px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .chat-log {
+            flex: 1;
+            padding: 10px;
+            overflow-y: auto;
+            background-color: white;
+        }
+        .chat-input {
+            display: flex;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        .chat-input button {
+            padding: 10px;
+            background-color: #D5006D;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        .chat-input button:hover {
+            background-color: #C51162;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>Bienvenue sur Mon Site Web</h1>
+        <h1>Boutique en Ligne</h1>
         <nav>
             <ul>
-                <li><a href="#" onclick="showSection('accueil')">Accueil</a></li>
-                <li><a href="#" onclick="showSection('services')">Services</a></li>
-                <li><a href="#" onclick="showSection('contact')">Contact</a></li>
+                <li><a href="#" onclick="showSection('home')">Accueil</a></li>
+                <li><a href="#" onclick="showSection('shop')">Boutique</a></li>
+                <li><a href="#" onclick="showSection('cart')">Panier</a></li>
+                <li><a href="#" onclick="showSection('personal-info')">Informations Personnelles</a></li>
+                <li><a href="#" onclick="showSection('chatbot')">Assistance</a></li>
             </ul>
         </nav>
     </header>
 
-    <div class="carousel">
-        <img src="https://via.placeholder.com/600x300?text=Image+1" class="active" alt="Image 1">
-        <img src="https://via.placeholder.com/600x300?text=Image+2" alt="Image 2">
-        <img src="https://via.placeholder.com/600x300?text=Image+3" alt="Image 3">
+    <div class="container">
+        <div id="home" class="section" style="display: block;">
+            <h2>Bienvenue dans notre Boutique !</h2>
+            <p>Découvrez nos produits les plus récents.</p>
+        </div>
+
+        <div id="shop" class="section" style="display: none;">
+            <h2>Nos Produits</h2>
+            <div class="product">
+                <img src="https://via.placeholder.com/150?text=Produit+1" alt="Produit 1">
+                <h3>Produit 1</h3>
+                <p>Une description du produit 1.</p>
+                <button onclick="addToCart('Produit 1', 10)">Ajouter au Panier</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/150?text=Produit+2" alt="Produit 2">
+                <h3>Produit 2</h3>
+                <p>Une description du produit 2.</p>
+                <button onclick="addToCart('Produit 2', 15)">Ajouter au Panier</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/150?text=Produit+3" alt="Produit 3">
+                <h3>Produit 3</h3>
+                <p>Une description du produit 3.</p>
+                <button onclick="addToCart('Produit 3', 20)">Ajouter au Panier</button>
+            </div>
+            <div class="product">
+                <img src="https://via.placeholder.com/150?text=Produit+4" alt="Produit 4">
+                <h3>Produit 4</h3>
+                <p>Une description du produit 4.</p>
+                <button onclick="addToCart('Produit 4', 25)">Ajouter au Panier</button>
+            </div>
+        </div>
+
+        <div id="cart" class="section" style="display: none;">
+            <h2>Votre Panier</h2>
+            <div id="cart-items"></div>
+            <p id="total-price">Total: 0€</p>
+        </div>
+
+        <div id="personal-info" class="section" style="display: none;">
+            <h2>Informations Personnelles</h2>
+            <form>
+                <label for="name">Nom :</label>
+                <input type="text" id="name" name="name" required placeholder="Votre nom">
+                
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required placeholder="Votre email">
+                
+                <label for="address">Adresse :</label>
+                <input type="text" id="address" name="address" required placeholder="Votre adresse">
+                
+                <button type="submit">Enregistrer</button>
+            </form>
+        </div>
+
+        <div id="chatbot" class="section" style="display: none;">
+            <h2>Assistance</h2>
+            <div class="chat-container">
+                <div class="chat-log" id="chat-log"></div>
+                <div class="chat-input">
+                    <input type="text" id="user-input" placeholder="Posez votre question...">
+                    <button onclick="sendMessage()">Envoyer</button>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <section id="accueil" style="display: block;">
-        <h2>À propos de moi</h2>
-        <p>Bonjour, je suis Boumbenda Ghyslain Glenn, et voici un aperçu de mon site web où je présente mes services de vente en ligne.</p>
-    </section>
-
-    <section id="services">
-        <h2>Mes Services</h2>
-        <ul>
-            <li><a href="#" onclick="showSubSection('produits-electroniques')">Produits Électroniques</a></li>
-            <li><a href="#" onclick="showSubSection('vetements')">Vêtements</a></li>
-            <li><a href="#" onclick="showSubSection('accessoires')">Accessoires Divers</a></li>
-        </ul>
-
-        <div id="produits-electroniques" class="sub-section">
-            <h3>Produits Électroniques</h3>
-            <ul>
-                <li>Smartphones</li>
-                <li>Tablettes</li>
-                <li>Accessoires de jeu</li>
-            </ul>
-        </div>
-
-        <div id="vetements" class="sub-section">
-            <h3>Vêtements</h3>
-            <ul>
-                <li>T-shirts</li>
-                <li>Pantalons</li>
-                <li>Vestes</li>
-            </ul>
-        </div>
-
-        <div id="accessoires" class="sub-section">
-            <h3>Accessoires Divers</h3>
-            <ul>
-                <li>Sacs à main</li>
-                <li>Montres</li>
-                <li>Lunettes de soleil</li>
-            </ul>
-        </div>
-    </section>
-
-    <section id="contact">
-        <h2>Contactez-moi</h2>
-        <form>
-            <label for="name">Nom :</label>
-            <input type="text" id="name" name="name" required placeholder="Votre nom" readonly value="Boumbenda Ghyslain Glenn">
-            
-            <label for="email">Email :</label>
-            <input type="email" id="email" name="email" required placeholder="Votre email" readonly value="boumbendaghyslain@outlook.fr">
-            
-            <label for="whatsapp">Numéro WhatsApp :</label>
-            <input type="text" id="whatsapp" name="whatsapp" required placeholder="Votre numéro WhatsApp" readonly value="+212693350278">
-            
-            <input type="submit" value="Envoyer">
-        </form>
-        <p>Vous pouvez également me contacter par e-mail : <a href="mailto:boumbendaghyslain@outlook.fr">boumbendaghyslain@outlook.fr</a></p>
-    </section>
-
     <footer>
-        <p>&copy; 2023 Mon Site Web. Tous droits réservés.</p>
+        <p>&copy; 2023 Boutique en Ligne. Tous droits réservés.</p>
     </footer>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const images = document.querySelectorAll(".carousel img");
-            let currentImage = 0;
-
-            // Carrousel d'images
-            function showNextImage() {
-                images[currentImage].classList.remove("active");
-                currentImage = (currentImage + 1) % images.length;
-                images[currentImage].classList.add("active");
-            }
-
-            setInterval(showNextImage, 3000); // Changer d'image toutes les 3 secondes
-        });
+        let cart = [];
 
         function showSection(sectionId) {
-            const sections = document.querySelectorAll("section");
+            const sections = document.querySelectorAll('.section');
             sections.forEach(section => {
-                section.style.display = 'none';
+                section.style.display = 'none'; // Masquer toutes les sections
             });
-
-            const activeSection = document.getElementById(sectionId);
-            activeSection.style.display = 'block';
-            hideAllSubSections(); // Masquer toutes les sous-sections
+            document.getElementById(sectionId).style.display = 'block'; // Afficher la section demandée
+            if (sectionId === 'cart') {
+                updateCart(); // Mettre à jour le panier
+            }
         }
 
-        function showSubSection(subSectionId) {
-            hideAllSubSections(); // Masquer toutes les sous-sections
-            const subSection = document.getElementById(subSectionId);
-            subSection.style.display = 'block'; // Afficher la sous-section demandée
+        function addToCart(productName, productPrice) {
+            const existingItem = cart.find(item => item.name === productName);
+            if (existingItem) {
+                existingItem.quantity += 1; // Augmenter la quantité si déjà présent
+            } else {
+                cart.push({ name: productName, price: productPrice, quantity: 1 });
+            }
+            alert(`${productName} a été ajouté au panier !`);
         }
 
-        function hideAllSubSections() {
-            const subSections = document.querySelectorAll('.sub-section');
-            subSections.forEach(sub => {
-                sub.style.display = 'none'; // Masquer toutes les sous-sections
+        function updateCart() {
+            const cartItemsDiv = document.getElementById('cart-items');
+            cartItemsDiv.innerHTML = ''; // Réinitialiser les éléments du panier
+            let total = 0;
+
+            cart.forEach(item => {
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'cart-item';
+                itemDiv.innerHTML = `${item.name} - ${item.quantity} x ${item.price}€`;
+                cartItemsDiv.appendChild(itemDiv);
+                total += item.price * item.quantity;
             });
+
+            document.getElementById('total-price').innerText = `Total: ${total}€`;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('user-input');
+            const userMessage = input.value;
+            if (userMessage.trim() === '') return;
+
+            // Afficher le message de l'utilisateur
+            const chatLog = document.getElementById('chat-log');
+            chatLog.innerHTML += `<div>Vous: ${userMessage}</div>`;
+
+            // Réponse du chatbot (simulée ici)
+            let botResponse = "Désolé, je ne peux pas répondre à cela.";
+            if (userMessage.toLowerCase().includes("produit")) {
+                botResponse = "Nous avons une variété de produits électroniques, vêtements et accessoires.";
+            } else if (userMessage.toLowerCase().includes("prix")) {
+                botResponse = "Les prix varient en fonction des produits. Veuillez consulter notre boutique.";
+            }
+
+            // Afficher la réponse du chatbot
+            chatLog.innerHTML += `<div>Bot: ${botResponse}</div>`;
+            input.value = ''; // Effacer le champ d'entrée
+            chatLog.scrollTop = chatLog.scrollHeight; // Faire défiler vers le bas
         }
     </script>
 </body>
 </html>
-
-

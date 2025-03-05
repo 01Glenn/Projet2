@@ -75,6 +75,14 @@
             bottom: 0;
             width: 100%;
         }
+
+        .sub-section {
+            display: none; /* Masquer les sous-sections par défaut */
+            margin-top: 20px;
+            background-color: #D1C4E9; /* Une couleur violet clair pour les sous-sections */
+            padding: 15px;
+            border-radius: 8px; /* Coins arrondis */
+        }
     </style>
 </head>
 <body>
@@ -103,10 +111,37 @@
     <section id="services">
         <h2>Mes Services</h2>
         <ul>
-            <li>Vente de produits électroniques</li>
-            <li>Vente de vêtements</li>
-            <li>Vente d'accessoires divers</li>
+            <li><a href="#" onclick="showSubSection('produits-electroniques')">Produits Électroniques</a></li>
+            <li><a href="#" onclick="showSubSection('vetements')">Vêtements</a></li>
+            <li><a href="#" onclick="showSubSection('accessoires')">Accessoires Divers</a></li>
         </ul>
+
+        <div id="produits-electroniques" class="sub-section">
+            <h3>Produits Électroniques</h3>
+            <ul>
+                <li>Smartphones</li>
+                <li>Tablettes</li>
+                <li>Accessoires de jeu</li>
+            </ul>
+        </div>
+
+        <div id="vetements" class="sub-section">
+            <h3>Vêtements</h3>
+            <ul>
+                <li>T-shirts</li>
+                <li>Pantalons</li>
+                <li>Vestes</li>
+            </ul>
+        </div>
+
+        <div id="accessoires" class="sub-section">
+            <h3>Accessoires Divers</h3>
+            <ul>
+                <li>Sacs à main</li>
+                <li>Montres</li>
+                <li>Lunettes de soleil</li>
+            </ul>
+        </div>
     </section>
 
     <section id="contact">
@@ -146,17 +181,30 @@
         });
 
         function showSection(sectionId) {
-            // Masquer toutes les sections
             const sections = document.querySelectorAll("section");
             sections.forEach(section => {
                 section.style.display = 'none';
             });
 
-            // Afficher la section demandée
             const activeSection = document.getElementById(sectionId);
             activeSection.style.display = 'block';
+            hideAllSubSections(); // Masquer toutes les sous-sections
+        }
+
+        function showSubSection(subSectionId) {
+            hideAllSubSections(); // Masquer toutes les sous-sections
+            const subSection = document.getElementById(subSectionId);
+            subSection.style.display = 'block'; // Afficher la sous-section demandée
+        }
+
+        function hideAllSubSections() {
+            const subSections = document.querySelectorAll('.sub-section');
+            subSections.forEach(sub => {
+                sub.style.display = 'none'; // Masquer toutes les sous-sections
+            });
         }
     </script>
 </body>
 </html>
+
 
